@@ -1,0 +1,2343 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>店鋪偶像｜台灣地偶文化入口</title>
+
+    <style>
+
+        /* =========================
+           基本設定
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                Arial,
+                "Noto Sans TC",
+                sans-serif;
+
+            background: #ffffff;
+            color: #222;
+        }
+
+
+        /* =========================
+           JP 語言按鈕
+        ========================= */
+
+        .language-button {
+            position: fixed;
+
+            top: 25px;
+            right: 105px;
+
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #ff72c8;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            text-decoration: none;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+        .language-button:hover {
+            transform: scale(1.08);
+            background-color: #fff3fb;
+        }
+
+
+        /* =========================
+           漢堡按鈕
+        ========================= */
+
+        .menu-button {
+            position: fixed;
+
+            top: 25px;
+            right: 30px;
+
+            width: 60px;
+            height: 60px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: white;
+
+            color: #ff72c8;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .menu-button:hover {
+            transform: scale(1.08);
+        }
+
+
+        /* =========================
+           展開選單
+        ========================= */
+
+        .menu-panel {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            min-height: 340px;
+
+            padding:
+                70px 100px
+                55px;
+
+            background-image:
+                url("圖片/oshi-liveb00001.png");
+
+            background-size: cover;
+            background-position: center;
+
+            z-index: 2000;
+
+            transform:
+                translateY(-100%);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                transform 0.5s ease,
+                opacity 0.4s ease,
+                visibility 0.4s ease;
+        }
+
+
+        .menu-panel.active {
+            transform:
+                translateY(0);
+
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        /* =========================
+           X 關閉按鈕
+        ========================= */
+
+        .menu-close {
+            position: absolute;
+
+            top: 25px;
+            right: 30px;
+
+            width: 60px;
+            height: 60px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: white;
+
+            cursor: pointer;
+
+            z-index: 3000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .menu-close:hover {
+            transform: scale(1.08);
+        }
+
+
+        /* 用 CSS 畫 X */
+
+        .menu-close span {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 25px;
+            height: 3px;
+
+            background: #ff72c8;
+
+            border-radius: 10px;
+        }
+
+        .menu-close span:first-child {
+            transform:
+                translate(-50%, -50%)
+                rotate(45deg);
+        }
+
+        .menu-close span:last-child {
+            transform:
+                translate(-50%, -50%)
+                rotate(-45deg);
+        }
+
+
+        /* =========================
+           選單排列
+        ========================= */
+
+        .menu-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 60px;
+
+            max-width: 1250px;
+
+            margin: 0 auto;
+        }
+
+
+        .menu-column {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+        }
+
+
+        .menu-category {
+            margin:
+                0 0 5px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 0.3em;
+        }
+
+
+        .menu-column a {
+            color: white;
+
+            font-size: 19px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            text-shadow:
+                0 2px 5px
+                rgba(60, 30, 100, 0.35);
+
+            transition:
+                transform 0.2s ease,
+                color 0.2s ease;
+        }
+
+
+        .menu-column a:hover {
+            transform:
+                translateX(6px);
+
+            color: #fff0fa;
+        }
+
+
+        /* =========================
+           文章頁整體
+        ========================= */
+
+        .article-page {
+            width:
+                min(1100px, 90%);
+
+            margin: 0 auto;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .article-hero {
+            padding:
+                150px 0
+                95px;
+
+            text-align: center;
+        }
+
+
+        .article-label {
+            margin:
+                0 0
+                12px;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.3em;
+
+            color: #ff70bd;
+        }
+
+
+        .article-hero h1 {
+            margin: 0;
+
+            font-size:
+                clamp(
+                    40px,
+                    6vw,
+                    68px
+                );
+
+            font-weight: 800;
+        }
+
+
+        .article-lead {
+            max-width: 650px;
+
+            margin:
+                25px auto
+                0;
+
+            font-size: 16px;
+
+            line-height: 2;
+
+            color: #666;
+        }
+
+
+        /* =========================
+           文章內容
+        ========================= */
+
+        .article-content {
+            max-width: 900px;
+
+            margin:
+                0 auto
+                140px;
+        }
+
+
+        .article-block {
+            display: grid;
+
+            grid-template-columns:
+                80px 1fr;
+
+            gap: 30px;
+
+            padding:
+                55px 0;
+
+            border-top:
+                1px solid
+                rgba(
+                    100,
+                    80,
+                    150,
+                    0.15
+                );
+        }
+
+
+        .article-block:last-child {
+            border-bottom:
+                1px solid
+                rgba(
+                    100,
+                    80,
+                    150,
+                    0.15
+                );
+        }
+
+
+        .article-number {
+            padding-top: 7px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.15em;
+
+            color: #ff70bd;
+        }
+
+
+        .article-text h2 {
+            margin:
+                0 0
+                20px;
+
+            font-size: 28px;
+
+            font-weight: 800;
+        }
+
+
+        .article-text p {
+            margin: 0;
+
+            font-size: 16px;
+
+            line-height: 2.1;
+
+            color: #555;
+        }
+        .article-text > p + p {
+    margin-top: 18px;
+}
+
+/* =========================
+   偶像分類卡片
+========================= */
+
+.category-intro {
+    margin-bottom: 30px !important;
+}
+
+.category-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-top: 30px;
+}
+
+
+/* 卡片 */
+
+.category-card {
+    position: relative;
+
+    min-height: 230px;
+
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    border:
+        1px solid
+        rgba(255, 112, 189, 0.18);
+
+    border-radius: 22px;
+
+    text-decoration: none;
+
+    color: #222;
+
+    box-shadow:
+        0 10px 28px
+        rgba(80, 60, 140, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.category-card:hover {
+    transform: translateY(-6px);
+
+    border-color:
+        rgba(255, 112, 189, 0.45);
+
+    box-shadow:
+        0 16px 35px
+        rgba(80, 60, 140, 0.14);
+}
+
+
+/* 英文小標 */
+
+.category-en {
+    margin-bottom: 10px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.25em;
+}
+
+
+/* 分類名稱 */
+
+.category-card h3 {
+    margin: 0 0 14px;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+
+/* 卡片說明 */
+
+.category-card p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.9;
+
+    color: #666;
+}
+
+
+/* VIEW MORE */
+
+.category-more {
+    margin-top: auto;
+    padding-top: 22px;
+
+    color: #ff70bd;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.category-card:hover .category-more {
+    transform: translateX(5px);
+}
+
+
+/* =========================
+   分類說明
+========================= */
+
+.category-note {
+    margin-top: 28px;
+
+    padding: 22px 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 112, 189, 0.08),
+            rgba(135, 154, 255, 0.08)
+        );
+
+    border-radius: 18px;
+}
+
+
+.category-note span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.25em;
+}
+
+
+.category-note p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+
+    color: #666;
+}
+
+
+/* =========================
+   手機版
+========================= */
+
+@media (max-width: 700px) {
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card {
+        min-height: 200px;
+    }
+
+}
+        /* =========================
+           手機版
+        ========================= */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .language-button {
+                top: 18px;
+                right: 88px;
+
+                width: 52px;
+                height: 52px;
+
+                font-size: 17px;
+            }
+
+
+            .menu-button {
+                top: 18px;
+                right: 22px;
+
+                width: 52px;
+                height: 52px;
+
+                font-size: 24px;
+            }
+
+
+            .menu-close {
+                top: 18px;
+                right: 22px;
+
+                width: 52px;
+                height: 52px;
+            }
+
+
+            .menu-panel {
+                min-height: 100vh;
+
+                padding:
+                    100px 35px
+                    50px;
+
+                overflow-y: auto;
+            }
+
+
+            .menu-grid {
+                grid-template-columns:
+                    1fr;
+
+                gap: 35px;
+            }
+
+
+            .article-hero {
+                padding:
+                    120px 0
+                    65px;
+            }
+
+
+            .article-block {
+                grid-template-columns:
+                    1fr;
+
+                gap: 12px;
+
+                padding:
+                    40px 0;
+            }
+
+        }
+
+        /* =========================
+           Footer
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+.site-footer {
+    width: 100%;
+
+    /* 不要再 min-height: 650px */
+    min-height: 0;
+
+    margin-top: 120px;
+    padding: 60px 30px 35px;
+
+    box-sizing: border-box;
+    text-align: center;
+
+    background-image:
+        linear-gradient(
+            rgba(10, 24, 75, 0.18),
+            rgba(10, 24, 75, 0.30)
+        ),
+        url("圖片/live_p_si.jpg");
+
+    background-size: cover;
+    background-position: center 68%;
+    background-repeat: no-repeat;
+
+    color: white;
+}
+
+.footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+
+    padding: 25px 40px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(10, 20, 70, 0.16);
+
+    backdrop-filter: blur(2px);
+}
+
+
+/* 英文小標 */
+
+.footer-label {
+    color: #ff9bd5;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.35em;
+
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.site-footer h2 {
+    color: #ffffff;
+
+    margin: 8px 0 25px;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.footer-nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.footer-nav a:hover {
+    color: #ff9bd5;
+    transform: translateY(-2px);
+}
+
+.footer-heart {
+    margin: 25px 0;
+
+    color: #ff77c8;
+    font-size: 24px;
+}
+
+.footer-project {
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 13px;
+    line-height: 1.9;
+
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
+}
+
+.footer-copy {
+    margin-top: 22px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 10px;
+    letter-spacing: 0.12em;
+}
+
+
+/* Footer 選單 */
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 15px 35px;
+}
+
+.footer-nav a {
+    color: rgba(255, 255, 255, 0.9);
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.footer-nav a:hover {
+    color: #ff70bd;
+}
+
+
+/* 小愛心 */
+
+.footer-heart {
+    margin: 35px 0;
+
+    color: #ff70bd;
+
+    font-size: 24px;
+}
+
+
+/* 專題說明 */
+
+.footer-project {
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 13px;
+    line-height: 1.9;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Copyright */
+
+.footer-copy {
+    margin-top: 22px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 10px;
+    letter-spacing: 0.12em;
+
+    text-shadow:
+        0 2px 7px rgba(0, 0, 0, 0.45);
+}
+
+
+/* 回到舞台 */
+
+.back-to-top {
+    margin-top: 28px;
+
+    padding: 11px 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+
+    background: rgba(20, 30, 90, 0.35);
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(6px);
+
+    transition: 0.25s ease;
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px);
+
+    background: white;
+    color: #5960c9;
+}
+
+/* =========================
+   活動形式
+========================= */
+
+.activity-intro {
+    margin-bottom: 30px !important;
+}
+
+
+.activity-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 30px;
+}
+
+
+/* 卡片 */
+
+.activity-card {
+    overflow: hidden;
+
+    background: white;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, 0.16);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(80, 60, 140, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.activity-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 16px 35px
+        rgba(80, 60, 140, 0.14);
+}
+
+
+/* 圖片 */
+
+.activity-card img {
+    display: block;
+
+    width: 100%;
+    height: 190px;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+/* 物販那張可以稍微調整裁切位置 */
+
+.activity-card img.buppan-image {
+    object-position: 48% center;
+}
+
+
+/* 文字區 */
+
+.activity-card-text {
+    padding: 22px;
+}
+
+
+.activity-card-text > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.2em;
+}
+
+
+.activity-card-text h3 {
+    margin:
+        0 0
+        12px;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+.activity-card-text p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #666;
+}
+
+
+/* =========================
+   手機
+========================= */
+
+@media (max-width: 700px) {
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-card img {
+        height: 220px;
+    }
+
+}
+/* =========================
+   IDOL LIST
+========================= */
+
+.idol-list-section {
+    width: min(1100px, 90%);
+    margin: 0 auto 140px;
+}
+
+
+/* 收錄資訊 */
+
+.idol-list-info {
+    max-width: 900px;
+    margin: 0 auto 70px;
+}
+
+
+.last-updated {
+    margin: 14px 5px 0;
+
+    text-align: right;
+
+    color: #aaa;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .18em;
+}
+
+
+.last-updated span {
+    margin-left: 8px;
+
+    color: #ff70bd;
+}
+
+
+/* 標題 */
+
+.idol-list-heading {
+    margin-bottom: 35px;
+}
+
+
+.idol-list-heading > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .25em;
+}
+
+
+.idol-list-heading h2 {
+    margin: 0 0 10px;
+
+    font-size: 32px;
+}
+
+
+.idol-list-heading p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+/* GRID */
+
+.idol-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+
+/* CARD */
+
+.idol-card {
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    background: white;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, .15);
+
+    border-radius: 22px;
+
+    color: #222;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 10px 28px
+        rgba(80, 60, 140, .07);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+
+.idol-card:hover {
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(255, 112, 189, .4);
+
+    box-shadow:
+        0 18px 38px
+        rgba(80, 60, 140, .13);
+}
+
+
+/* PHOTO */
+
+.idol-image {
+    position: relative;
+
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+
+    background: #f4f2f6;
+}
+
+
+.idol-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .5s ease;
+}
+
+
+.idol-card:hover
+.idol-image img {
+    transform: scale(1.04);
+}
+
+
+/* ACTIVE */
+
+.idol-status {
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    padding: 6px 10px;
+
+    background:
+        rgba(255, 255, 255, .9);
+
+    border-radius: 999px;
+
+    color: #ff70bd;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: .15em;
+}
+
+
+/* CONTENT */
+
+.idol-card-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 23px;
+}
+
+
+.idol-type {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .2em;
+}
+
+
+.idol-card h3 {
+    margin: 0 0 20px;
+
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+
+/* COMPANY */
+
+.idol-meta {
+    padding-top: 15px;
+
+    border-top:
+        1px solid
+        rgba(100, 80, 150, .1);
+}
+
+
+.idol-meta span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #aaa;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: .18em;
+}
+
+
+.idol-meta p {
+    margin: 0;
+
+    color: #666;
+
+    font-size: 12px;
+}
+
+
+/* VIEW */
+
+.idol-view {
+    margin-top: auto;
+
+    padding-top: 24px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .1em;
+
+    transition:
+        transform .25s ease;
+}
+
+
+.idol-card:hover
+.idol-view {
+    transform: translateX(5px);
+}
+/* =========================
+   IDOL CATEGORY NAV
+========================= */
+
+.idol-category-nav {
+    margin: 0 0 65px;
+    text-align: center;
+}
+
+
+.category-nav-label {
+    display: block;
+
+    margin-bottom: 16px;
+
+    color: #aaa;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .25em;
+}
+
+
+.category-nav-buttons {
+    display: flex;
+
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+
+.category-nav-buttons a {
+    min-width: 120px;
+
+    padding: 12px 22px;
+
+    background: #fff;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, .25);
+
+    border-radius: 999px;
+
+    color: #777;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.category-nav-buttons a:hover {
+    transform: translateY(-3px);
+
+    color: #ff70bd;
+
+    box-shadow:
+        0 8px 20px
+        rgba(255, 112, 189, .12);
+}
+
+
+/* 目前所在頁面 */
+
+.category-nav-buttons a.active {
+    background:
+        linear-gradient(
+            135deg,
+            #ff70bd,
+            #a78bfa
+        );
+
+    border-color: transparent;
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px
+        rgba(255, 112, 189, .2);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .idol-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .idol-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+@media (max-width: 600px) {
+
+    .category-nav-buttons {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+
+    .category-nav-buttons a {
+        min-width: 0;
+
+        padding: 12px 10px;
+    }
+
+}
+
+.idol-status.hiatus {
+    color: #8c78c9;
+}
+
+.home-button {
+    position: fixed;
+
+    top: 25px;
+    left: 30px;
+
+    height: 60px;
+    width: 60px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    padding: 0 20px;
+
+    background: white;
+
+    border-radius: 999px;
+
+    color: #ff70bd;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 25px
+        rgba(80, 60, 140, .10);
+
+    z-index: 1000;
+
+    transition:
+        width .3s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.home-arrow {
+    flex-shrink: 0;
+
+    font-size: 22px;
+}
+
+
+.home-text {
+    margin-left: 12px;
+
+    opacity: 0;
+
+    white-space: nowrap;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .18em;
+
+    transition: opacity .2s ease;
+}
+
+
+.home-button:hover {
+    width: 125px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(80, 60, 140, .16);
+}
+
+
+.home-button:hover .home-text {
+    opacity: 1;
+}
+    
+/* =========================
+   IDOL PROFILE MODAL
+========================= */
+.idol-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(28, 20, 45, .58);
+    backdrop-filter: blur(7px);
+}
+.idol-modal.open { display: flex; }
+.idol-modal-dialog {
+    position: relative;
+    width: min(760px, 100%);
+    max-height: min(88vh, 900px);
+    overflow-y: auto;
+    padding: 34px;
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 28px;
+    background: #fff;
+    box-shadow: 0 25px 80px rgba(20, 12, 50, .25);
+    animation: idolModalIn .22s ease-out;
+}
+@keyframes idolModalIn {
+    from { opacity: 0; transform: translateY(12px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.idol-modal-close {
+    position: sticky;
+    float: right;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    margin: -12px -12px 0 12px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff1f9;
+    color: #d94d9f;
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+}
+.idol-modal-kicker {
+    margin: 0 0 8px;
+    color: #d95ca8;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .24em;
+}
+.idol-modal-title {
+    margin: 0;
+    font-size: clamp(25px, 4vw, 34px);
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+.idol-modal-subtitle {
+    margin: 8px 0 0;
+    color: #8b7a99;
+    font-size: 13px;
+}
+.idol-modal-section { margin-top: 28px; }
+.idol-modal-section h3 {
+    margin: 0 0 13px;
+    color: #d95ca8;
+    font-size: 11px;
+    letter-spacing: .2em;
+}
+.idol-modal-description {
+    margin: 0;
+    color: #5f5965;
+    font-size: 14px;
+    line-height: 2;
+}
+.idol-member-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+.idol-member {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #f2e4ef;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #fffafd, #faf8ff);
+}
+.idol-member-symbol { font-size: 25px; flex-shrink: 0; }
+.idol-member-name { min-width: 0; font-weight: 800; font-size: 14px; overflow-wrap: anywhere; }
+.idol-member-romaji { margin-top: 4px; color: #8b8191; font-size: 11px; overflow-wrap: anywhere; }
+.idol-social-links { display: flex; flex-wrap: wrap; gap: 9px; }
+.idol-social-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid #f0d6e7;
+    border-radius: 999px;
+    color: #bd4b91;
+    background: #fff8fc;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease;
+}
+.idol-social-links a:hover { background: #ffedf7; transform: translateY(-2px); }
+.idol-modal-note { margin: 22px 0 0; color: #a49aa8; font-size: 10px; line-height: 1.8; }
+body.modal-open { overflow: hidden; }
+@media (max-width: 600px) {
+    .idol-modal { padding: 12px; }
+    .idol-modal-dialog { padding: 24px 18px; border-radius: 22px; }
+    .idol-member-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         JP 按鈕
+    ========================= -->
+
+    <a
+        href="ja／/日文店鋪偶像.html"
+        class="language-button"
+    >
+        JP
+    </a>
+
+<a href="首頁.html" class="home-button">
+    <span class="home-arrow">←</span>
+    <span class="home-text">HOME</span>
+</a>
+
+    <!-- =========================
+         漢堡按鈕
+    ========================= -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="開啟選單"
+    >
+        ☰
+    </button>
+
+
+
+    <!-- =========================
+         展開選單
+    ========================= -->
+
+    <nav
+        class="menu-panel"
+        id="menuPanel"
+    >
+
+
+        <!-- 關閉 X -->
+
+        <button
+            class="menu-close"
+            id="menuClose"
+            aria-label="關閉選單"
+        >
+
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+
+        <div class="menu-grid">
+
+
+            <!-- BEGINNER -->
+
+            <div class="menu-column">
+
+                <p class="menu-category">
+                    BEGINNER
+                </p>
+
+                <a href="首頁.html">
+                    ♡ 首頁
+                </a>
+
+                <a href="地下偶像介紹.html">
+                    ♡ 地下偶像是什麼？
+                </a>
+
+                <a href="歐他.html">
+                    ♡ 成為「歐他」
+                </a>
+
+                <a href="MIX.html">
+                    ♡ 基礎 MIX
+                </a>
+
+                <a href="如何成為地下偶像.html">
+                    ♡ 如何成為地下偶像？
+                </a>
+
+            </div>
+
+
+
+            <!-- IDOL -->
+
+            <div class="menu-column">
+
+                <p class="menu-category">
+                    IDOL
+                </p>
+
+                <a href="企業偶像.html">
+                    ♡ 企業偶像
+                </a>
+
+                <a href="自營偶像.html">
+                    ♡ 自營偶像
+                </a>
+
+                <a href="個人偶像.html">
+                    ♡ 個人偶像
+                </a>
+
+                <a href="店鋪偶像.html">
+                    ♡ 店鋪偶像
+                </a>
+
+            </div>
+
+
+
+            <!-- INFORMATION -->
+
+            <div class="menu-column">
+
+                <p class="menu-category">
+                    INFORMATION
+                </p>
+
+                <a href="首頁.html#calendar">
+                    ♡ 行事曆
+                </a>
+
+                <a href="資料來源.html">
+                    ♡ 資料來源感謝
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         文章頁
+    ========================= -->
+
+    <section class="article-hero">
+
+    <p class="article-label">
+        IDOL 04
+    </p>
+
+    <h1>
+        店鋪偶像
+    </h1>
+
+    <p class="article-lead">
+        <h3>從店鋪出發，認識不一樣的偶像文化。</h3>
+
+以女僕咖啡廳、主題咖啡廳等店鋪為活動據點，透過日常互動、舞台演出與粉絲活動，展現結合店鋪文化與偶像活動的獨特魅力。
+    </p>
+
+</section>
+
+
+    <section class="idol-list-section">
+
+        <!-- 收錄說明 -->
+
+        <div class="idol-list-info">
+
+            <div class="category-note">
+
+                <span>ABOUT IDOL LIST</span>
+
+                <p>
+                    本站主要收錄目前仍持續活動中的台灣地下偶像。
+                    已解散個人、已畢業或停止活動的偶像原則上不列入收錄；
+                    活動狀態以本站資料整理時點為準。
+                </p>
+                <p class="random-note">※ 團體顯示順序為隨機排列。</p>
+
+            </div>
+
+            <p class="last-updated">
+                LAST UPDATED
+                <span>2026.10</span>
+            </p>
+
+        </div>
+        <nav class="idol-category-nav">
+
+    <span class="category-nav-label">
+        IDOL CATEGORY
+    </span>
+
+    <div class="category-nav-buttons">
+
+        <a href="企業偶像.html">
+            企業偶像
+        </a>
+
+        <a href="自營偶像.html">
+            自營偶像
+        </a>
+
+        <a href="個人偶像.html">
+            個人偶像
+        </a>
+
+        <a href="店鋪偶像.html" class="active">
+            店鋪偶像
+        </a>
+
+    </div>
+
+</nav>
+
+
+        <!-- 標題 -->
+<div class="idol-list-heading">
+
+    <span>ACTIVE IDOLS</span>
+
+    <h2>現役店鋪偶像</h2>
+
+    <p>
+        點選團體卡片，可以查看個人介紹與相關資訊。
+    </p>
+
+</div>
+
+
+        <!-- 店鋪列表 -->
+
+        <div class="idol-grid">
+
+           <!-- 團體 01 -->
+
+            <a
+                href="天国地獄.html"
+                class="idol-card"
+            >
+
+                <div class="idol-image">
+
+                    <img
+                        src="圖片/偶像/天国地獄.jpg"
+                        alt="天国地獄"
+                    >
+
+                    <span class="idol-status">
+                        ACTIVE
+                    </span>
+
+                </div>
+
+
+                <div class="idol-card-content">
+
+                    <span class="idol-type">
+                        COMPANY IDOL
+                    </span>
+
+                    <h3>
+                        天国地獄
+                    </h3>
+
+                    <div class="idol-meta">
+
+                        <span>PRODUCTION</span>
+
+                        <p>
+                            可蕾仙朵女僕咖啡館
+                        </p>
+
+                    </div>
+
+
+                    <span class="idol-view">
+                        VIEW PROFILE →
+                    </span>
+
+                </div>
+
+            </a><!-- 團體 02 -->
+
+            <a
+                href="無我夢中.html"
+                class="idol-card"
+            >
+
+                <div class="idol-image">
+
+                    <img
+                        src="圖片/偶像/無我夢中.jpg"
+                        alt="無我夢中"
+                    >
+
+                    <span class="idol-status">
+                        ACTIVE
+                    </span>
+
+                </div>
+
+
+                <div class="idol-card-content">
+
+                    <span class="idol-type">
+                        COMPANY IDOL
+                    </span>
+
+                    <h3>
+                        無我夢中
+                    </h3>
+
+                    <div class="idol-meta">
+
+                        <span>PRODUCTION</span>
+
+                        <p>
+                            Night Tour夜巡
+                        </p>
+
+                    </div>
+
+
+                    <span class="idol-view">
+                        VIEW PROFILE →
+                    </span>
+
+                </div>
+
+            </a> </a>
+            
+            <!-- 團體 03 -->
+
+            <a
+                href="貓貓戰隊.html"
+                class="idol-card"
+            >
+
+                <div class="idol-image">
+
+                    <img
+                        src="圖片/偶像/貓貓戰隊.png"
+                        alt="貓貓戰隊"
+                    >
+
+                    <span class="idol-status">
+                        ACTIVE
+                    </span>
+
+                </div>
+
+
+                <div class="idol-card-content">
+
+                    <span class="idol-type">
+                        COMPANY IDOL
+                    </span>
+
+                    <h3>
+                        貓貓戰隊
+                    </h3>
+
+                    <div class="idol-meta">
+
+                        <span>PRODUCTION</span>
+
+                        <p>
+                            貓貓領域女僕咖啡
+                        </p>
+
+                    </div>
+
+
+                    <span class="idol-view">
+                        VIEW PROFILE →
+                    </span>
+
+                </div>
+
+            </a>
+
+            <!-- 團體 04 -->
+
+            <a
+                href="KIRIS.html"
+                class="idol-card"
+            >
+
+                <div class="idol-image">
+
+                    <img
+                        src="圖片/偶像/KIRIS.jpg"
+                        alt="KIRIS"
+                    >
+
+                    <span class="idol-status">
+                        ACTIVE
+                    </span>
+
+                </div>
+
+
+                <div class="idol-card-content">
+
+                    <span class="idol-type">
+                        COMPANY IDOL
+                    </span>
+
+                    <h3>
+                        KIRIS
+                    </h3>
+
+                    <div class="idol-meta">
+
+                        <span>PRODUCTION</span>
+
+                        <p>
+                            KIRA BASE
+                        </p>
+
+                    </div>
+
+
+                    <span class="idol-view">
+                        VIEW PROFILE →
+                    </span>
+
+                </div>
+
+            </a>
+           
+        </div>
+
+    </section>
+
+</main>
+            </div>
+
+
+        </section>
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <p class="footer-label">
+            TAIWAN UNDERGROUND IDOL CULTURE
+        </p>
+
+        <h2>台灣地偶文化入口</h2>
+
+        <div class="footer-nav">
+            <a href="首頁.html#calendar">SCHEDULE</a>
+            <a href="地下偶像介紹.html">BEGINNER</a>
+            <a href="#">IDOL</a>
+        </div>
+
+        <div class="footer-heart">♡</div>
+
+        <p class="footer-project">
+            本網站為畢業專題製作<br>
+            資料來源與相關連結請見 Credits
+        </p>
+
+        <p class="footer-copy">
+            © 2026 TAIWAN UNDERGROUND IDOL CULTURE
+        </p>
+
+    </div>
+
+    <button class="back-to-top" id="backToTop">
+        BACK TO STAGE ↑
+    </button>
+
+</footer>
+
+    </main>
+
+
+
+    <!-- =========================
+         選單 JS
+    ========================= -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+        const menuPanel =
+            document.getElementById(
+                "menuPanel"
+            );
+
+        const menuClose =
+            document.getElementById(
+                "menuClose"
+            );
+
+
+        /* 打開 */
+
+        menuButton.addEventListener(
+            "click",
+            () => {
+
+                menuPanel.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /* 關閉 */
+
+        menuClose.addEventListener(
+            "click",
+            () => {
+
+                menuPanel.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /* 按 ESC 也可以關 */
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    menuPanel.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+        const backToTop =
+    document.getElementById("backToTop");
+
+backToTop.addEventListener("click", () => {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+    </script>
+<script>
+    const idolGrid = document.querySelector(".idol-grid");
+    const idolCards = Array.from(
+        idolGrid.querySelectorAll(".idol-card")
+    );
+
+    // Fisher-Yates Shuffle
+    for (let i = idolCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [idolCards[i], idolCards[j]] =
+        [idolCards[j], idolCards[i]];
+    }
+
+    idolCards.forEach(card => {
+        idolGrid.appendChild(card);
+    });
+</script>
+
+
+<!-- 共用偶像介紹視窗：先顯示卡片已有資料，詳細內容可再補充 -->
+<div class="idol-modal" id="idolProfileModal" role="dialog" aria-modal="true" aria-labelledby="idolModalTitle" aria-hidden="true">
+  <div class="idol-modal-dialog" role="document" tabindex="-1">
+    <button class="idol-modal-close" type="button" aria-label="Close profile">×</button>
+    <p class="idol-modal-kicker" id="idolModalKicker">IDOL PROFILE</p>
+    <h2 class="idol-modal-title" id="idolModalTitle"></h2>
+    <p class="idol-modal-subtitle" id="idolModalSubtitle"></p>
+    <div id="idolModalBody"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const modal = document.getElementById('idolProfileModal');
+  if (!modal) return;
+  const dialog = modal.querySelector('.idol-modal-dialog');
+  const closeButton = modal.querySelector('.idol-modal-close');
+  const title = document.getElementById('idolModalTitle');
+  const kicker = document.getElementById('idolModalKicker');
+  const subtitle = document.getElementById('idolModalSubtitle');
+  const body = document.getElementById('idolModalBody');
+  const isJapanese = document.documentElement.lang.toLowerCase().startsWith('ja');
+  let previousFocus = null;
+  const text = isJapanese ? {
+    profile:'アイドルプロフィール', category:'カテゴリー', organization:'所属・運営', status:'活動状況',
+    about:'ABOUT THE IDOL', details:'掲載情報', pending:'詳細情報は現在整理中です。',
+    explain:'このウィンドウでは、現在ページに掲載されている情報をまとめています。メンバー、公式SNS、活動情報などは、確認でき次第更新します。',
+    more:'MORE INFORMATION', original:'元の紹介ページを見る ↗', note:'活動状況やメンバー構成は変更される場合があります。最新情報は公式発表をご確認ください。',
+    unknown:'確認中'
+  } : {
+    profile:'偶像介紹', category:'分類', organization:'企劃／所屬單位', status:'活動狀態',
+    about:'ABOUT THE IDOL', details:'目前收錄資訊', pending:'詳細介紹資料尚待整理。',
+    explain:'此視窗先整理本站卡片已有的資訊。成員名單、官方社群與活動資料將在確認後逐步補上。',
+    more:'MORE INFORMATION', original:'查看原本介紹頁 ↗', note:'活動狀態與成員組成可能變動，最新資訊請以官方公告為準。',
+    unknown:'待確認'
+  };
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  function section(label, content) { return `<section class="idol-modal-section"><h3>${label}</h3>${content}</section>`; }
+  function openModal(card) {
+    previousFocus = card;
+    const name = card.querySelector('h3')?.textContent.trim() || text.profile;
+    const type = card.querySelector('.idol-type')?.textContent.trim() || (isJapanese ? 'アイドル' : '偶像');
+    const production = card.querySelector('.idol-meta p')?.textContent.trim() || text.unknown;
+    const status = card.querySelector('.idol-status')?.textContent.trim() || text.unknown;
+    const image = card.querySelector('.idol-image img');
+    const imageSrc = image?.getAttribute('src') || '';
+    const href = card.getAttribute('href') || '';
+    kicker.textContent = `${type} · PROFILE`;
+    title.textContent = name;
+    subtitle.textContent = `${text.organization} ／ ${production}`;
+    let html = '';
+    if (imageSrc) html += `<div style="margin-top:20px;overflow:hidden;border-radius:18px;max-height:260px;background:#faf7fb"><img src="${esc(imageSrc)}" alt="${esc(name)}" style="display:block;width:100%;max-height:260px;object-fit:cover"></div>`;
+    html += section(text.about, `<p class="idol-modal-description">${text.explain}</p>`);
+    html += section(text.details, `<p class="idol-modal-description">${text.category}：${esc(type)}<br>${text.organization}：${esc(production)}<br>${text.status}：${esc(status)}</p>`);
+    if (href && href !== '#') html += section(text.more, `<div class="idol-social-links"><a href="${esc(href)}">${text.original}</a></div>`);
+    html += `<p class="idol-modal-note">${text.note}</p>`;
+    body.innerHTML = html;
+    modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('modal-open'); closeButton.focus();
+  }
+  function closeModal() {
+    modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('modal-open');
+    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+  }
+  document.querySelectorAll('.idol-card').forEach(card => {
+    card.addEventListener('click', event => { event.preventDefault(); openModal(card); });
+    card.setAttribute('aria-haspopup','dialog');
+    if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex','0');
+    card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openModal(card); } });
+  });
+  closeButton.addEventListener('click', closeModal);
+  modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    if (event.key === 'Tab' && modal.classList.contains('open')) {
+      const focusable = dialog.querySelectorAll('a[href], button:not([disabled])');
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+  });
+})();
+</script>
+</body>
+
+</html>

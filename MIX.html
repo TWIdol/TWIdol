@@ -1,0 +1,3005 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>基礎 MIX｜台灣地偶文化入口</title>
+
+    <style>
+
+        /* =========================
+           基本設定
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                Arial,
+                "Noto Sans TC",
+                sans-serif;
+
+            background: #ffffff;
+            color: #222;
+        }
+
+
+
+        /* =========================
+           HOME 返回按鈕
+        ========================= */
+
+        .home-button {
+            position: fixed;
+            top: 25px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #fff;
+            color: #ff72c8;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: width 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .home-arrow {
+            flex-shrink: 0;
+            font-size: 26px;
+            line-height: 1;
+            transition: transform 0.25s ease;
+        }
+
+        .home-text {
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            transition: max-width 0.25s ease, opacity 0.2s ease;
+        }
+
+        .home-button:hover,
+        .home-button:focus-visible {
+            width: 118px;
+            background: #fff3fb;
+        }
+
+        .home-button:hover .home-arrow,
+        .home-button:focus-visible .home-arrow {
+            transform: translateX(-2px);
+        }
+
+        .home-button:hover .home-text,
+        .home-button:focus-visible .home-text {
+            max-width: 48px;
+            opacity: 1;
+        }
+
+
+        /* =========================
+           JP 語言按鈕
+        ========================= */
+
+        .language-button {
+            position: fixed;
+
+            top: 25px;
+            right: 105px;
+
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #ff72c8;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            text-decoration: none;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+        .language-button:hover {
+            transform: scale(1.08);
+            background-color: #fff3fb;
+        }
+
+
+        /* =========================
+           漢堡按鈕
+        ========================= */
+
+        .menu-button {
+            position: fixed;
+
+            top: 25px;
+            right: 30px;
+
+            width: 60px;
+            height: 60px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: white;
+
+            color: #ff72c8;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .menu-button:hover {
+            transform: scale(1.08);
+        }
+
+
+        /* =========================
+           展開選單
+        ========================= */
+
+        .menu-panel {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            min-height: 340px;
+
+            padding:
+                70px 100px
+                55px;
+
+            background-image:
+                url("圖片/oshi-liveb00001.png");
+
+            background-size: cover;
+            background-position: center;
+
+            z-index: 2000;
+
+            transform:
+                translateY(-100%);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                transform 0.5s ease,
+                opacity 0.4s ease,
+                visibility 0.4s ease;
+        }
+
+
+        .menu-panel.active {
+            transform:
+                translateY(0);
+
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        /* =========================
+           X 關閉按鈕
+        ========================= */
+
+        .menu-close {
+            position: absolute;
+
+            top: 25px;
+            right: 30px;
+
+            width: 60px;
+            height: 60px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: white;
+
+            cursor: pointer;
+
+            z-index: 3000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .menu-close:hover {
+            transform: scale(1.08);
+        }
+
+
+        /* 用 CSS 畫 X */
+
+        .menu-close span {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 25px;
+            height: 3px;
+
+            background: #ff72c8;
+
+            border-radius: 10px;
+        }
+
+        .menu-close span:first-child {
+            transform:
+                translate(-50%, -50%)
+                rotate(45deg);
+        }
+
+        .menu-close span:last-child {
+            transform:
+                translate(-50%, -50%)
+                rotate(-45deg);
+        }
+
+
+        /* =========================
+           選單排列
+        ========================= */
+
+        .menu-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 60px;
+
+            max-width: 1250px;
+
+            margin: 0 auto;
+        }
+
+
+        .menu-column {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+        }
+
+
+        .menu-category {
+            margin:
+                0 0 5px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 0.3em;
+        }
+
+
+        .menu-column a {
+            color: white;
+
+            font-size: 19px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            text-shadow:
+                0 2px 5px
+                rgba(60, 30, 100, 0.35);
+
+            transition:
+                transform 0.2s ease,
+                color 0.2s ease;
+        }
+
+
+        .menu-column a:hover {
+            transform:
+                translateX(6px);
+
+            color: #fff0fa;
+        }
+
+
+        /* =========================
+           文章頁整體
+        ========================= */
+
+        .article-page {
+            width:
+                min(1100px, 90%);
+
+            margin: 0 auto;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .article-hero {
+            padding:
+                150px 0
+                95px;
+
+            text-align: center;
+        }
+
+
+        .article-label {
+            margin:
+                0 0
+                12px;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.3em;
+
+            color: #ff70bd;
+        }
+
+
+        .article-hero h1 {
+            margin: 0;
+
+            font-size:
+                clamp(
+                    40px,
+                    6vw,
+                    68px
+                );
+
+            font-weight: 800;
+        }
+
+
+        .article-lead {
+            max-width: 650px;
+
+            margin:
+                25px auto
+                0;
+
+            font-size: 16px;
+
+            line-height: 2;
+
+            color: #666;
+        }
+
+
+        /* =========================
+           文章內容
+        ========================= */
+
+        .article-content {
+            max-width: 900px;
+
+            margin:
+                0 auto
+                140px;
+        }
+
+
+        .article-block {
+            display: grid;
+
+            grid-template-columns:
+                80px 1fr;
+
+            gap: 30px;
+
+            padding:
+                55px 0;
+
+            border-top:
+                1px solid
+                rgba(
+                    100,
+                    80,
+                    150,
+                    0.15
+                );
+        }
+
+
+        .article-block:last-child {
+            border-bottom:
+                1px solid
+                rgba(
+                    100,
+                    80,
+                    150,
+                    0.15
+                );
+        }
+
+
+        .article-number {
+            padding-top: 7px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.15em;
+
+            color: #ff70bd;
+        }
+
+
+        .article-text h2 {
+            margin:
+                0 0
+                20px;
+
+            font-size: 28px;
+
+            font-weight: 800;
+        }
+
+
+        .article-text p {
+            margin: 0;
+
+            font-size: 16px;
+
+            line-height: 2.1;
+
+            color: #555;
+        }
+        .article-text > p + p {
+    margin-top: 18px;
+}
+
+/* =========================
+   偶像分類卡片
+========================= */
+
+.category-intro {
+    margin-bottom: 30px !important;
+}
+
+.category-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-top: 30px;
+}
+
+
+/* 卡片 */
+
+.category-card {
+    position: relative;
+
+    min-height: 230px;
+
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    border:
+        1px solid
+        rgba(255, 112, 189, 0.18);
+
+    border-radius: 22px;
+
+    text-decoration: none;
+
+    color: #222;
+
+    box-shadow:
+        0 10px 28px
+        rgba(80, 60, 140, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.category-card:hover {
+    transform: translateY(-6px);
+
+    border-color:
+        rgba(255, 112, 189, 0.45);
+
+    box-shadow:
+        0 16px 35px
+        rgba(80, 60, 140, 0.14);
+}
+
+
+/* 英文小標 */
+
+.category-en {
+    margin-bottom: 10px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.25em;
+}
+
+
+/* 分類名稱 */
+
+.category-card h3 {
+    margin: 0 0 14px;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+
+/* 卡片說明 */
+
+.category-card p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.9;
+
+    color: #666;
+}
+
+
+/* VIEW MORE */
+
+.category-more {
+    margin-top: auto;
+    padding-top: 22px;
+
+    color: #ff70bd;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.category-card:hover .category-more {
+    transform: translateX(5px);
+}
+
+
+/* =========================
+   分類說明
+========================= */
+
+.category-note {
+    margin-top: 28px;
+
+    padding: 22px 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 112, 189, 0.08),
+            rgba(135, 154, 255, 0.08)
+        );
+
+    border-radius: 18px;
+}
+
+
+.category-note span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.25em;
+}
+
+
+.category-note p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+
+    color: #666;
+}
+
+
+/* =========================
+   手機版
+========================= */
+
+@media (max-width: 700px) {
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card {
+        min-height: 200px;
+    }
+
+}
+        /* =========================
+           手機版
+        ========================= */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .home-button {
+                top: 18px;
+                left: 22px;
+                width: 52px;
+                height: 52px;
+            }
+
+            .home-button:hover,
+            .home-button:focus-visible {
+                width: 108px;
+            }
+
+            .home-arrow {
+                font-size: 23px;
+            }
+
+            .language-button {
+                top: 18px;
+                right: 88px;
+
+                width: 52px;
+                height: 52px;
+
+                font-size: 17px;
+            }
+
+
+            .menu-button {
+                top: 18px;
+                right: 22px;
+
+                width: 52px;
+                height: 52px;
+
+                font-size: 24px;
+            }
+
+
+            .menu-close {
+                top: 18px;
+                right: 22px;
+
+                width: 52px;
+                height: 52px;
+            }
+
+
+            .menu-panel {
+                min-height: 100vh;
+
+                padding:
+                    100px 35px
+                    50px;
+
+                overflow-y: auto;
+            }
+
+
+            .menu-grid {
+                grid-template-columns:
+                    1fr;
+
+                gap: 35px;
+            }
+
+
+            .article-hero {
+                padding:
+                    120px 0
+                    65px;
+            }
+
+
+            .article-block {
+                grid-template-columns:
+                    1fr;
+
+                gap: 12px;
+
+                padding:
+                    40px 0;
+            }
+
+        }
+
+        /* =========================
+           Footer
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+.site-footer {
+    width: 100%;
+
+    /* 不要再 min-height: 650px */
+    min-height: 0;
+
+    margin-top: 120px;
+    padding: 60px 30px 35px;
+
+    box-sizing: border-box;
+    text-align: center;
+
+    background-image:
+        linear-gradient(
+            rgba(10, 24, 75, 0.18),
+            rgba(10, 24, 75, 0.30)
+        ),
+        url("圖片/live_p_si.jpg");
+
+    background-size: cover;
+    background-position: center 68%;
+    background-repeat: no-repeat;
+
+    color: white;
+}
+
+.footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+
+    padding: 25px 40px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(10, 20, 70, 0.16);
+
+    backdrop-filter: blur(2px);
+}
+
+
+/* 英文小標 */
+
+.footer-label {
+    color: #ff9bd5;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.35em;
+
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.site-footer h2 {
+    color: #ffffff;
+
+    margin: 8px 0 25px;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.footer-nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.footer-nav a:hover {
+    color: #ff9bd5;
+    transform: translateY(-2px);
+}
+
+.footer-heart {
+    margin: 25px 0;
+
+    color: #ff77c8;
+    font-size: 24px;
+}
+
+.footer-project {
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 13px;
+    line-height: 1.9;
+
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
+}
+
+.footer-copy {
+    margin-top: 22px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 10px;
+    letter-spacing: 0.12em;
+}
+
+
+/* Footer 選單 */
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 15px 35px;
+}
+
+.footer-nav a {
+    color: rgba(255, 255, 255, 0.9);
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.footer-nav a:hover {
+    color: #ff70bd;
+}
+
+
+/* 小愛心 */
+
+.footer-heart {
+    margin: 35px 0;
+
+    color: #ff70bd;
+
+    font-size: 24px;
+}
+
+
+/* 專題說明 */
+
+.footer-project {
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 13px;
+    line-height: 1.9;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Copyright */
+
+.footer-copy {
+    margin-top: 22px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 10px;
+    letter-spacing: 0.12em;
+
+    text-shadow:
+        0 2px 7px rgba(0, 0, 0, 0.45);
+}
+
+
+/* 回到舞台 */
+
+.back-to-top {
+    margin-top: 28px;
+
+    padding: 11px 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+
+    background: rgba(20, 30, 90, 0.35);
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(6px);
+
+    transition: 0.25s ease;
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px);
+
+    background: white;
+    color: #5960c9;
+}
+
+/* =========================
+   活動形式
+========================= */
+
+.activity-intro {
+    margin-bottom: 30px !important;
+}
+
+
+.activity-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 30px;
+}
+
+
+/* 卡片 */
+
+.activity-card {
+    overflow: hidden;
+
+    background: white;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, 0.16);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(80, 60, 140, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.activity-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 16px 35px
+        rgba(80, 60, 140, 0.14);
+}
+
+
+/* 圖片 */
+
+.activity-card img {
+    display: block;
+
+    width: 100%;
+    height: 190px;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+/* 物販那張可以稍微調整裁切位置 */
+
+.activity-card img.buppan-image {
+    object-position: 48% center;
+}
+
+
+/* 文字區 */
+
+.activity-card-text {
+    padding: 22px;
+}
+
+
+.activity-card-text > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.2em;
+}
+
+
+.activity-card-text h3 {
+    margin:
+        0 0
+        12px;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+.activity-card-text p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #666;
+}
+
+
+/* =========================
+   手機
+========================= */
+
+@media (max-width: 700px) {
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-card img {
+        height: 220px;
+    }
+
+}
+
+/* =========================
+   MIX 01
+   QUESTION
+========================= */
+
+.mix-question {
+    margin-top: 30px;
+    padding: 40px 30px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 112, 189, .08),
+            rgba(135, 154, 255, .08)
+        );
+
+    border-radius: 24px;
+}
+
+
+.mix-question-text {
+    margin: 0 0 15px !important;
+
+    color: #777 !important;
+
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+}
+
+
+.mix-question h3 {
+    margin: 0 0 25px;
+
+    font-size: 24px;
+}
+
+
+.mix-question-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+
+.mix-answer-button {
+    padding: 12px 22px;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, .35);
+
+    border-radius: 999px;
+
+    background: white;
+
+    color: #ff70bd;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.mix-answer-button:hover {
+    transform: translateY(-3px);
+
+    background: #ff70bd;
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px
+        rgba(255, 112, 189, .2);
+}
+
+
+/* ANSWER */
+
+.mix-answer {
+    display: none;
+
+    margin-top: 22px;
+
+    padding: 30px;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, .15);
+
+    border-radius: 22px;
+
+    background: white;
+
+    box-shadow:
+        0 10px 28px
+        rgba(80, 60, 140, .07);
+
+    animation:
+        mixAnswerIn .5s ease;
+}
+
+
+.mix-answer.show {
+    display: block;
+}
+
+
+@keyframes mixAnswerIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+.mix-answer-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .25em;
+}
+
+
+.mix-answer h3 {
+    margin: 0 0 18px;
+
+    font-size: 24px;
+}
+
+
+.mix-answer p + p {
+    margin-top: 15px;
+}
+
+
+/* 咒語 Quote */
+
+.mix-quote {
+    margin-top: 25px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 112, 189, .08),
+            rgba(135, 154, 255, .08)
+        );
+
+    border-radius: 18px;
+}
+
+
+.mix-quote span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .25em;
+}
+
+
+.mix-quote p {
+    margin: 0 !important;
+
+    color: #444 !important;
+
+    font-size: 16px !important;
+    font-weight: 700;
+
+    line-height: 1.9 !important;
+}
+
+
+
+/* =========================
+   MIX 02
+   PRACTICE
+========================= */
+
+.mix-practice {
+    margin-top: 35px;
+
+    padding: 38px 30px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 112, 189, .08),
+            rgba(135, 154, 255, .08)
+        );
+
+    border-radius: 24px;
+}
+
+
+.mix-heading > span {
+    display: block;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .25em;
+}
+
+
+.mix-heading h3 {
+    margin: 8px 0;
+
+    font-size: 26px;
+}
+
+
+.mix-heading p {
+    margin: 0 0 28px !important;
+
+    color: #777 !important;
+
+    font-size: 13px !important;
+}
+
+
+/* MIX 單字 */
+
+.mix-words {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.mix-word {
+    min-width: 105px;
+
+    padding: 13px 15px;
+
+    background: white;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, .15);
+
+    border-radius: 13px;
+
+    color: #777;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.mix-word span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #ff9bd5;
+
+    font-size: 8px;
+
+    letter-spacing: .15em;
+}
+
+
+/* 當前喊到的字 */
+
+.mix-word.active {
+    background: #ff70bd;
+
+    color: white;
+
+    transform:
+        translateY(-6px)
+        scale(1.05);
+
+    box-shadow:
+        0 10px 24px
+        rgba(255, 112, 189, .28);
+}
+
+
+.mix-word.active span {
+    color: white;
+}
+
+
+/* START */
+
+.mix-start {
+    margin-top: 30px;
+
+    padding: 13px 30px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #ff70bd;
+
+    color: white;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: .15em;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.mix-start:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 9px 22px
+        rgba(255, 112, 189, .3);
+}
+
+
+
+/* =========================
+   MIX 03
+   SONG TIMELINE
+========================= */
+
+.song-demo {
+    margin-top: 35px;
+
+    padding: 32px;
+
+    background: #faf9fc;
+
+    border-radius: 22px;
+}
+
+
+.song-demo-title span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .22em;
+}
+
+
+.song-demo-title h3 {
+    margin: 0 0 30px;
+
+    font-size: 20px;
+}
+
+
+.song-timeline {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.song-part {
+    position: relative;
+
+    flex: 1;
+
+    min-height: 100px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px 10px;
+
+    background: white;
+
+    border:
+        1px solid
+        rgba(100, 80, 150, .1);
+
+    border-radius: 15px;
+}
+
+
+.song-part strong {
+    font-size: 12px;
+
+    letter-spacing: .1em;
+}
+
+
+.song-part small {
+    margin-top: 5px;
+
+    color: #999;
+
+    font-size: 11px;
+}
+
+
+.song-part.mix-here {
+    border-color:
+        rgba(255, 112, 189, .45);
+
+    box-shadow:
+        0 7px 18px
+        rgba(255, 112, 189, .1);
+}
+
+
+.song-tag {
+    position: absolute;
+
+    top: -10px;
+
+    padding: 5px 9px;
+
+    background: #ff70bd;
+
+    border-radius: 999px;
+
+    color: white;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: .08em;
+}
+
+
+.song-arrow {
+    color: #ff9bd5;
+
+    font-size: 18px;
+}
+
+
+.mix-small-text {
+    margin-top: 15px !important;
+
+    color: #999 !important;
+
+    font-size: 11px !important;
+
+    text-align: center;
+}
+
+
+
+/* =========================
+   MIX 04
+   MORE
+========================= */
+
+.more-mix-card {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-top: 30px;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 112, 189, .08),
+            rgba(135, 154, 255, .08)
+        );
+
+    border-radius: 22px;
+}
+
+
+.more-mix-en {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .2em;
+}
+
+
+.more-mix-card h3 {
+    margin: 0 0 10px;
+
+    font-size: 22px;
+}
+
+
+.more-mix-card p {
+    margin: 0 !important;
+
+    font-size: 13px !important;
+
+    color: #666 !important;
+}
+
+
+.mix-list-button {
+    flex-shrink: 0;
+
+    padding: 12px 20px;
+
+    background: white;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, .25);
+
+    border-radius: 999px;
+
+    color: #ff70bd;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .1em;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease;
+}
+
+
+.mix-list-button:hover {
+    transform: translateY(-3px);
+
+    background: #ff70bd;
+
+    color: white;
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .mix-question {
+        padding: 30px 20px;
+    }
+
+
+    .mix-practice {
+        padding: 30px 18px;
+    }
+
+
+    .mix-word {
+        min-width:
+            calc(50% - 8px);
+    }
+
+
+    .song-timeline {
+        flex-direction: column;
+    }
+
+
+    .song-part {
+        width: 100%;
+    }
+
+
+    .song-arrow {
+        transform: rotate(90deg);
+    }
+
+
+    .more-mix-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+}
+
+.mix-video-practice {
+    margin-top: 30px;
+
+    padding: 28px;
+
+    background: rgba(255,255,255,.75);
+
+    border-radius: 20px;
+}
+
+
+.mix-video-heading {
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+
+.mix-video-heading > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .22em;
+}
+
+
+.mix-video-heading h3 {
+    margin: 0 0 8px;
+
+    font-size: 20px;
+}
+
+
+.mix-video-heading p {
+    margin: 0 !important;
+
+    color: #777 !important;
+
+    font-size: 12px !important;
+}
+
+
+/* YouTube 響應式影片 */
+
+.youtube-wrap {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background: #111;
+}
+
+
+.youtube-wrap iframe {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+}
+
+
+/* 重新練習按鈕 */
+
+.video-controls {
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 18px;
+}
+
+
+.replay-mix-button {
+    padding: 12px 24px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #ff70bd;
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: .12em;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.replay-mix-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(255, 112, 189, .25);
+}
+
+
+.video-note {
+    margin: 12px 0 0 !important;
+
+    text-align: center;
+
+    color: #999 !important;
+
+    font-size: 11px !important;
+}
+
+/* =========================
+   YOUTUBE MIX PRACTICE
+========================= */
+
+.mix-video-practice {
+    margin-top: 30px;
+    padding: 28px;
+
+    background: rgba(255, 255, 255, .75);
+
+    border-radius: 20px;
+}
+
+
+.mix-video-heading {
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+
+.mix-video-heading > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .22em;
+}
+
+
+.mix-video-heading h3 {
+    margin: 0 0 8px;
+
+    font-size: 20px;
+}
+
+
+.mix-video-heading p {
+    margin: 0 !important;
+
+    color: #777 !important;
+
+    font-size: 12px !important;
+}
+
+
+/* YouTube */
+
+.youtube-wrap {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background: #111;
+}
+
+
+.youtube-wrap iframe {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+}
+
+
+/* 影片時間提示 */
+
+.video-note {
+    margin: 12px 0 0 !important;
+
+    text-align: center;
+
+    color: #999 !important;
+
+    font-size: 11px !important;
+}
+/* =========================
+   NEXT BEGINNER
+========================= */
+
+.beginner-next {
+    max-width: 900px;
+    margin: 0 auto 140px;
+}
+
+
+.beginner-next-label {
+    display: block;
+
+    margin-bottom: 14px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .25em;
+}
+
+
+.beginner-next-link {
+    display: grid;
+
+    grid-template-columns: 70px 1fr auto;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 30px 10px;
+
+    border-top:
+        1px solid rgba(100, 80, 150, .15);
+
+    border-bottom:
+        1px solid rgba(100, 80, 150, .15);
+
+    color: #222;
+
+    text-decoration: none;
+
+    transition:
+        padding-left .3s ease,
+        color .3s ease;
+}
+
+
+.beginner-next-link:hover {
+    padding-left: 22px;
+
+    color: #ff70bd;
+}
+
+
+.beginner-next-number {
+    color: #ff70bd;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: .15em;
+}
+
+
+.beginner-next-title h2 {
+    margin: 0 0 5px;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+
+.beginner-next-title p {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+.beginner-next-arrow {
+    font-size: 28px;
+
+    transition: transform .3s ease;
+}
+
+
+.beginner-next-link:hover
+.beginner-next-arrow {
+    transform: translateX(8px);
+}
+
+
+@media (max-width: 600px) {
+
+    .beginner-next-link {
+        grid-template-columns: 45px 1fr auto;
+
+        gap: 15px;
+
+        padding: 25px 5px;
+    }
+
+
+    .beginner-next-title h2 {
+        font-size: 18px;
+    }
+
+}
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         JP 按鈕
+    ========================= -->
+
+    <a
+        href="ja／/日文MIX.html"
+        class="language-button"
+    >
+        JP
+    </a>
+
+    <a href="首頁.html" class="home-button">
+    <span class="home-arrow">←</span>
+    <span class="home-text">HOME</span>
+</a>
+
+
+
+    <!-- =========================
+         漢堡按鈕
+    ========================= -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="開啟選單"
+    >
+        ☰
+    </button>
+
+
+
+    <!-- =========================
+         展開選單
+    ========================= -->
+
+    <nav
+        class="menu-panel"
+        id="menuPanel"
+    >
+
+
+        <!-- 關閉 X -->
+
+        <button
+            class="menu-close"
+            id="menuClose"
+            aria-label="關閉選單"
+        >
+
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+
+        <div class="menu-grid">
+
+
+            <!-- BEGINNER -->
+
+            <div class="menu-column">
+
+                <p class="menu-category">
+                    BEGINNER
+                </p>
+
+                <a href="首頁.html">
+                    ♡ 首頁
+                </a>
+
+                <a href="地下偶像介紹.html">
+                    ♡ 地下偶像是什麼？
+                </a>
+
+                <a href="歐他.html">
+                    ♡ 成為「歐他」
+                </a>
+
+                <a href="MIX.html">
+                    ♡ 基礎 MIX
+                </a>
+
+                <a href="如何成為地下偶像.html">
+                    ♡ 如何成為地下偶像？
+                </a>
+
+            </div>
+
+
+
+            <!-- IDOL -->
+
+            <div class="menu-column">
+
+                <p class="menu-category">
+                    IDOL
+                </p>
+
+                <a href="企業偶像.html">
+                    ♡ 企業偶像
+                </a>
+
+                <a href="自營偶像.html">
+                    ♡ 自營偶像
+                </a>
+
+                <a href="個人偶像.html">
+                    ♡ 個人偶像
+                </a>
+
+                <a href="店鋪偶像.html">
+                    ♡ 店鋪偶像
+                </a>
+
+            </div>
+
+
+
+            <!-- INFORMATION -->
+
+            <div class="menu-column">
+
+                <p class="menu-category">
+                    INFORMATION
+                </p>
+
+                <a href="首頁.html#calendar">
+                    ♡ 行事曆
+                </a>
+
+                <a href="資料來源.html">
+                    ♡ 資料來源感謝
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         文章頁
+    ========================= -->
+
+  <main class="article-page">
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="article-hero">
+
+        <p class="article-label">
+            BEGINNER 03
+        </p>
+
+        <h1>
+            基礎 MIX
+        </h1>
+
+        <p class="article-lead">
+            到現場發現大家都在喊一些東西……
+            那是什麼？咒語嗎？
+        </p>
+
+    </section>
+
+
+    <section class="article-content">
+
+
+        <!-- =========================
+             01 MIX 是什麼？
+        ========================== -->
+
+        <div class="article-block">
+
+            <span class="article-number">01</span>
+
+            <div class="article-text">
+
+                <h2>那是什麼？咒語嗎？</h2>
+
+                <!-- 互動問題 -->
+
+                <div class="mix-question">
+
+                    <p class="mix-question-text">
+                        LIVE 開始了！<br>
+                        身邊的粉絲突然一起喊出了一串東西……
+                    </p>
+
+                    <h3>
+                        他們到底在喊什麼？
+                    </h3>
+
+                    <div class="mix-question-buttons">
+
+                    
+                        <button
+                            type="button"
+                            class="mix-answer-button"
+                            data-answer="call"
+                        >
+                            我想知道 👀
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 點擊後才出現 -->
+
+                <div
+                    class="mix-answer"
+                    id="mixAnswer"
+                >
+
+                    <span class="mix-answer-label">
+                        ANSWER
+                    </span>
+
+                    <h3>
+                        是 Call，也是應援！
+                    </h3>
+
+                    <p>
+                        現場粉絲配合歌曲喊出的口號，
+                        可以稱為「應援」，
+                        更精準地說則是
+                        <strong>Call（コール）</strong>。
+                    </p>
+
+                    <p>
+                        其中常見的一種就是
+                        <strong>MIX</strong>。
+                        MIX 通常由固定的詞語組成，
+                        並配合歌曲的前奏、間奏等段落喊出。
+                    </p>
+
+
+                    <div class="mix-quote">
+
+                        <span>MAGIC WORDS?</span>
+
+                        <p>
+                            「要說是咒語，好像也算是吧。<br>
+                            是連接偶像與歐他的咒語呦！」
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             02 MIX 怎麼喊？
+        ========================== -->
+
+        <div class="article-block">
+
+            <span class="article-number">02</span>
+
+            <div class="article-text">
+
+                <h2>MIX 怎麼喊？</h2>
+
+                <p>
+                    先從最常見的標準 MIX 開始吧！
+                    按下 START，跟著亮起來的文字一起感受 MIX 的節奏。
+                </p>
+
+
+                <div class="mix-practice">
+
+                    <div class="mix-heading">
+
+                        <span>
+                            TRY IT!
+                        </span>
+
+                        <h3>
+                            STANDARD MIX
+                        </h3>
+
+                        <p>
+                            按下 START，文字會依序亮起。
+                        </p>
+
+                    </div>
+
+
+                    <div class="mix-words">
+
+                        <div class="mix-word">
+                            <span>01</span>
+                            タイガー(Tiger)
+                        </div>
+
+                        <div class="mix-word">
+                            <span>02</span>
+                            ファイヤー(Fire)
+                        </div>
+
+                        <div class="mix-word">
+                            <span>03</span>
+                            サイバー(Cyber)
+                        </div>
+
+                        <div class="mix-word">
+                            <span>04</span>
+                            ファイバー(Fiber)
+                        </div>
+
+                        <div class="mix-word">
+                            <span>05</span>
+                            ダイバー(Diver)
+                        </div>
+
+                        <div class="mix-word">
+                            <span>06</span>
+                            バイバー(Viber)
+                        </div>
+
+                        <div class="mix-word">
+                            <span>07</span>
+                            ジャージャー(Jarjar)
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="mix-start"
+                        id="mixStart"
+                    >
+                        ▶ START
+                    </button>
+
+                </div>
+                <div class="mix-video-practice">
+
+    <div class="mix-video-practice">
+
+    <div class="mix-video-practice">
+
+    <div class="mix-video-heading">
+
+        <span>WATCH & PRACTICE</span>
+
+        <h3>跟著實際歌曲練習看看吧！</h3>
+
+        <p>
+            都記住了嗎？
+            那就跟著歌曲的節奏一起試一次吧！
+        </p>
+
+    </div>
+
+
+    <div class="youtube-wrap">
+
+        <div id="mixYoutubePlayer"></div>
+
+    </div>
+
+
+    <div class="video-controls">
+
+        <button
+            type="button"
+            class="replay-mix-button"
+            id="replayMix"
+        >
+            ↻ 再練一次
+        </button>
+
+    </div>
+
+
+    <p class="video-note">
+        練習區間 00:44 — 00:52
+    </p>
+
+</div>
+
+
+                <div class="category-note">
+
+                    <span>PLEASE NOTE</span>
+
+                    <p>
+                        MIX 的使用方式會依歌曲、團體與現場文化有所不同。
+                        並不是每一首歌曲都會使用相同的 MIX，
+                        第一次參加活動時也可以先觀察現場的應援方式。
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             03 什麼時候喊？
+        ========================== -->
+
+        <div class="article-block">
+
+            <span class="article-number">03</span>
+
+            <div class="article-text">
+
+                <h2>什麼時候喊 MIX？</h2>
+
+                <p>
+                    MIX 並不是從歌曲開始一路喊到結束，
+                    通常會出現在適合應援的特定段落。
+                </p>
+
+
+                <!-- 假歌曲時間軸 -->
+
+                <div class="song-demo">
+
+                    <div class="song-demo-title">
+
+                        <span>SONG DEMO</span>
+
+                        <h3>
+                            假裝現在有一首歌正在播放……
+                        </h3>
+
+                    </div>
+
+
+                    <div class="song-timeline">
+
+                        <div class="song-part mix-here">
+
+                            <span class="song-tag">
+                                MIX HERE!
+                            </span>
+
+                            <strong>
+                                INTRO
+                            </strong>
+
+                            <small>
+                                前奏
+                            </small>
+
+                        </div>
+
+
+                        <div class="song-arrow">
+                            →
+                        </div>
+
+
+                        <div class="song-part">
+
+                            <strong>
+                                VERSE
+                            </strong>
+
+                            <small>
+                                主歌
+                            </small>
+
+                        </div>
+
+
+                        <div class="song-arrow">
+                            →
+                        </div>
+
+
+                        <div class="song-part">
+
+                            <strong>
+                                CHORUS
+                            </strong>
+
+                            <small>
+                                副歌
+                            </small>
+
+                        </div>
+
+
+                        <div class="song-arrow">
+                            →
+                        </div>
+
+
+                        <div class="song-part mix-here">
+
+                            <span class="song-tag">
+                                MIX HERE!
+                            </span>
+
+                            <strong>
+                                INTERLUDE
+                            </strong>
+
+                            <small>
+                                間奏
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <p class="mix-small-text">
+                    ↑ 這只是幫助理解的簡化示意。
+                    實際喊 MIX 的位置會依歌曲編排而有所不同。
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             04 更多 MIX
+        ========================== -->
+
+        <div class="article-block">
+
+            <span class="article-number">04</span>
+
+            <div class="article-text">
+
+                <h2>還有其他 MIX 嗎？</h2>
+
+                <p>
+                    當然有！除了基礎的標準 MIX，
+                    現場還能聽見許多不同種類的 MIX 與 Call。
+                </p>
+
+
+                <div class="more-mix-card">
+
+                    <div>
+
+                        <span class="more-mix-en">
+                            WANT TO KNOW MORE?
+                        </span>
+
+                        <h3>
+                            台灣地下偶像 MIX 表
+                        </h3>
+
+                        <p>
+                            想認識更多 MIX 與 Call，
+                            可以前往整理表查看完整內容。
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="https://docs.google.com/spreadsheets/d/1sooEb3-qeUB48idetS5mUuQveO4nilUVpzBTE9SxiYI/edit?gid=0#gid=0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="mix-list-button"
+                    >
+                        VIEW MIX LIST →
+                    </a>
+
+                </div>
+
+
+                <div class="category-note">
+
+                    <span>ENJOY YOUR WAY</span>
+
+                    <p>
+                        不會 MIX 也完全沒關係！
+                        應援並不是參加 LIVE 的必要條件。
+                        可以先享受舞台、觀察現場，
+                        再用自己舒服的方式參與演出。
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+<nav class="beginner-next">
+
+    <span class="beginner-next-label">
+        NEXT BEGINNER
+    </span>
+
+    <a href="企業偶像.html" class="beginner-next-link">
+
+    <span class="beginner-next-number">
+        IDOL
+    </span>
+
+    <div class="beginner-next-title">
+        <h2>認識台灣地下偶像</h2>
+        <p>找到你想支持的偶像吧！</p>
+    </div>
+
+    <span class="beginner-next-arrow">
+        →
+    </span>
+
+</a>
+
+</nav>
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <p class="footer-label">
+            TAIWAN UNDERGROUND IDOL CULTURE
+        </p>
+
+        <h2>台灣地偶文化入口</h2>
+
+        <div class="footer-nav">
+            <a href="首頁.html#calendar">SCHEDULE</a>
+            <a href="地下偶像介紹.html">BEGINNER</a>
+            <a href="#">IDOL</a>
+        </div>
+
+        <div class="footer-heart">♡</div>
+
+        <p class="footer-project">
+            本網站為畢業專題製作<br>
+            資料來源與相關連結請見 Credits
+        </p>
+
+        <p class="footer-copy">
+            © 2026 TAIWAN UNDERGROUND IDOL CULTURE
+        </p>
+
+    </div>
+
+    <button class="back-to-top" id="backToTop">
+        BACK TO STAGE ↑
+    </button>
+
+</footer>
+</main>
+
+
+
+    <!-- =========================
+         選單 JS
+    ========================= -->
+
+    <script>
+
+    /* MENU */
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const menuPanel =
+        document.getElementById("menuPanel");
+
+    const menuClose =
+        document.getElementById("menuClose");
+
+
+    menuButton.addEventListener("click", () => {
+        menuPanel.classList.add("active");
+    });
+
+
+    menuClose.addEventListener("click", () => {
+        menuPanel.classList.remove("active");
+    });
+
+
+    document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape") {
+            menuPanel.classList.remove("active");
+        }
+
+    });
+
+
+
+    /* MIX QUESTION */
+
+    const mixAnswerButtons =
+        document.querySelectorAll(".mix-answer-button");
+
+    const mixAnswer =
+        document.getElementById("mixAnswer");
+
+
+    mixAnswerButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            mixAnswer.classList.add("show");
+
+            mixAnswer.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        });
+
+    });
+
+
+
+    /* MIX PRACTICE - 真人喊聲 */
+
+    const mixStart =
+        document.getElementById("mixStart");
+
+    const mixWords =
+        document.querySelectorAll(".mix-word");
+
+    // 真人 MIX 音檔，需與 HTML 放在同一個資料夾
+    const mixAudio = new Audio("mix-standard.mp3");
+    mixAudio.preload = "auto";
+
+    let mixPlaying = false;
+
+    function clearMixHighlight() {
+        mixWords.forEach(word => {
+            word.classList.remove("active");
+        });
+    }
+
+    function updateMixHighlight() {
+        if (!mixAudio.duration || !Number.isFinite(mixAudio.duration)) return;
+
+        const progress = mixAudio.currentTime / mixAudio.duration;
+        const activeIndex = Math.min(
+            mixWords.length - 1,
+            Math.floor(progress * mixWords.length)
+        );
+
+        clearMixHighlight();
+
+        if (mixPlaying && activeIndex >= 0) {
+            mixWords[activeIndex].classList.add("active");
+        }
+    }
+
+    mixStart.addEventListener("click", async () => {
+        // 若正在播放，避免重複啟動
+        if (mixPlaying) return;
+
+        mixPlaying = true;
+        mixStart.textContent = "PLAYING...";
+        mixStart.disabled = true;
+        clearMixHighlight();
+
+        try {
+            mixAudio.currentTime = 0;
+            await mixAudio.play();
+        } catch (error) {
+            mixPlaying = false;
+            mixStart.disabled = false;
+            mixStart.textContent = "▶ START";
+            clearMixHighlight();
+            alert("音檔無法播放，請確認 mix-standard.mp3 是否與此 HTML 放在同一個資料夾。");
+        }
+    });
+
+    // 依照真人音檔的播放進度同步亮起七個詞語
+    mixAudio.addEventListener("timeupdate", updateMixHighlight);
+
+    mixAudio.addEventListener("ended", () => {
+        mixPlaying = false;
+        mixStart.disabled = false;
+        mixStart.textContent = "▶ AGAIN";
+        clearMixHighlight();
+    });
+
+    mixAudio.addEventListener("error", () => {
+        mixPlaying = false;
+        mixStart.disabled = false;
+        mixStart.textContent = "▶ START";
+        clearMixHighlight();
+    });
+
+    /* =========================
+   YOUTUBE MIX PRACTICE
+========================= */
+
+let mixYoutubePlayer;
+
+
+/* YouTube API 載入完成後執行 */
+
+function onYouTubeIframeAPIReady() {
+
+    mixYoutubePlayer = new YT.Player(
+        "mixYoutubePlayer",
+        {
+            videoId: "GcciPSr98uY",
+
+            playerVars: {
+                start: 44,
+                end: 52,
+                rel: 0
+            }
+        }
+    );
+
+}
+
+
+/* 再練一次 */
+
+const replayMix =
+    document.getElementById("replayMix");
+
+
+replayMix.addEventListener("click", () => {
+
+    if (!mixYoutubePlayer) {
+        return;
+    }
+
+
+    /* 跳回 44 秒 */
+
+    mixYoutubePlayer.seekTo(
+        44,
+        true
+    );
+
+
+    /* 直接播放 */
+
+    mixYoutubePlayer.playVideo();
+
+});
+
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+</body>
+
+</html>
