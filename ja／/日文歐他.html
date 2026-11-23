@@ -1,0 +1,2093 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>オタクになるには？｜台湾地下アイドル文化ガイド</title>
+
+    <style>
+
+        /* =========================
+           基本設定
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                Arial,
+                "Noto Sans TC",
+                sans-serif;
+
+            background: #ffffff;
+            color: #222;
+        }
+
+
+        /* =========================
+           JP 語言按鈕
+        ========================= */
+
+        .language-button {
+            position: fixed;
+
+            top: 25px;
+            right: 105px;
+
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #ff72c8;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            text-decoration: none;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+        .language-button:hover {
+            transform: scale(1.08);
+            background-color: #fff3fb;
+        }
+
+
+        /* =========================
+           漢堡按鈕
+        ========================= */
+
+        .menu-button {
+            position: fixed;
+
+            top: 25px;
+            right: 30px;
+
+            width: 60px;
+            height: 60px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: white;
+
+            color: #ff72c8;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .menu-button:hover {
+            transform: scale(1.08);
+        }
+
+
+        /* =========================
+           展開選單
+        ========================= */
+
+        .menu-panel {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            min-height: 340px;
+
+            padding:
+                70px 100px
+                55px;
+
+            background-image:
+                url("../圖片/oshi-liveb00001.png");
+
+            background-size: cover;
+            background-position: center;
+
+            z-index: 2000;
+
+            transform:
+                translateY(-100%);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                transform 0.5s ease,
+                opacity 0.4s ease,
+                visibility 0.4s ease;
+        }
+
+
+        .menu-panel.active {
+            transform:
+                translateY(0);
+
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        /* =========================
+           X 關閉按鈕
+        ========================= */
+
+        .menu-close {
+            position: absolute;
+
+            top: 25px;
+            right: 30px;
+
+            width: 60px;
+            height: 60px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: white;
+
+            cursor: pointer;
+
+            z-index: 3000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .menu-close:hover {
+            transform: scale(1.08);
+        }
+
+
+        /* 用 CSS 畫 X */
+
+        .menu-close span {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 25px;
+            height: 3px;
+
+            background: #ff72c8;
+
+            border-radius: 10px;
+        }
+
+        .menu-close span:first-child {
+            transform:
+                translate(-50%, -50%)
+                rotate(45deg);
+        }
+
+        .menu-close span:last-child {
+            transform:
+                translate(-50%, -50%)
+                rotate(-45deg);
+        }
+
+
+        /* =========================
+           選單排列
+        ========================= */
+
+        .menu-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 60px;
+
+            max-width: 1250px;
+
+            margin: 0 auto;
+        }
+
+
+        .menu-column {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+        }
+
+
+        .menu-category {
+            margin:
+                0 0 5px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 0.3em;
+        }
+
+
+        .menu-column a {
+            color: white;
+
+            font-size: 19px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            text-shadow:
+                0 2px 5px
+                rgba(60, 30, 100, 0.35);
+
+            transition:
+                transform 0.2s ease,
+                color 0.2s ease;
+        }
+
+
+        .menu-column a:hover {
+            transform:
+                translateX(6px);
+
+            color: #fff0fa;
+        }
+
+
+        /* =========================
+           文章頁整體
+        ========================= */
+
+        .article-page {
+            width:
+                min(1100px, 90%);
+
+            margin: 0 auto;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .article-hero {
+            padding:
+                150px 0
+                95px;
+
+            text-align: center;
+        }
+
+
+        .article-label {
+            margin:
+                0 0
+                12px;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.3em;
+
+            color: #ff70bd;
+        }
+
+
+        .article-hero h1 {
+            margin: 0;
+
+            font-size:
+                clamp(
+                    40px,
+                    6vw,
+                    68px
+                );
+
+            font-weight: 800;
+        }
+
+
+        .article-lead {
+            max-width: 650px;
+
+            margin:
+                25px auto
+                0;
+
+            font-size: 16px;
+
+            line-height: 2;
+
+            color: #666;
+        }
+
+
+        /* =========================
+           文章內容
+        ========================= */
+
+        .article-content {
+            max-width: 900px;
+
+            margin:
+                0 auto
+                140px;
+        }
+
+
+        .article-block {
+            display: grid;
+
+            grid-template-columns:
+                80px 1fr;
+
+            gap: 30px;
+
+            padding:
+                55px 0;
+
+            border-top:
+                1px solid
+                rgba(
+                    100,
+                    80,
+                    150,
+                    0.15
+                );
+        }
+
+
+        .article-block:last-child {
+            border-bottom:
+                1px solid
+                rgba(
+                    100,
+                    80,
+                    150,
+                    0.15
+                );
+        }
+
+
+        .article-number {
+            padding-top: 7px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.15em;
+
+            color: #ff70bd;
+        }
+
+
+        .article-text h2 {
+            margin:
+                0 0
+                20px;
+
+            font-size: 28px;
+
+            font-weight: 800;
+        }
+
+
+        .article-text p {
+            margin: 0;
+
+            font-size: 16px;
+
+            line-height: 2.1;
+
+            color: #555;
+        }
+        .article-text > p + p {
+    margin-top: 18px;
+}
+
+/* =========================
+   偶像分類卡片
+========================= */
+
+.category-intro {
+    margin-bottom: 30px !important;
+}
+
+.category-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-top: 30px;
+}
+
+
+/* 卡片 */
+
+.category-card {
+    position: relative;
+
+    min-height: 230px;
+
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    border:
+        1px solid
+        rgba(255, 112, 189, 0.18);
+
+    border-radius: 22px;
+
+    text-decoration: none;
+
+    color: #222;
+
+    box-shadow:
+        0 10px 28px
+        rgba(80, 60, 140, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.category-card:hover {
+    transform: translateY(-6px);
+
+    border-color:
+        rgba(255, 112, 189, 0.45);
+
+    box-shadow:
+        0 16px 35px
+        rgba(80, 60, 140, 0.14);
+}
+
+
+/* 英文小標 */
+
+.category-en {
+    margin-bottom: 10px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.25em;
+}
+
+
+/* 分類名稱 */
+
+.category-card h3 {
+    margin: 0 0 14px;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+
+/* 卡片說明 */
+
+.category-card p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.9;
+
+    color: #666;
+}
+
+
+/* VIEW MORE */
+
+.category-more {
+    margin-top: auto;
+    padding-top: 22px;
+
+    color: #ff70bd;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.category-card:hover .category-more {
+    transform: translateX(5px);
+}
+
+
+/* =========================
+   分類說明
+========================= */
+
+.category-note {
+    margin-top: 28px;
+
+    padding: 22px 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 112, 189, 0.08),
+            rgba(135, 154, 255, 0.08)
+        );
+
+    border-radius: 18px;
+}
+
+
+.category-note span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.25em;
+}
+
+
+.category-note p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+
+    color: #666;
+}
+
+
+/* =========================
+   手機版
+========================= */
+
+@media (max-width: 700px) {
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card {
+        min-height: 200px;
+    }
+
+}
+        /* =========================
+           手機版
+        ========================= */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .language-button {
+                top: 18px;
+                right: 88px;
+
+                width: 52px;
+                height: 52px;
+
+                font-size: 17px;
+            }
+
+
+            .menu-button {
+                top: 18px;
+                right: 22px;
+
+                width: 52px;
+                height: 52px;
+
+                font-size: 24px;
+            }
+
+
+            .menu-close {
+                top: 18px;
+                right: 22px;
+
+                width: 52px;
+                height: 52px;
+            }
+
+
+            .menu-panel {
+                min-height: 100vh;
+
+                padding:
+                    100px 35px
+                    50px;
+
+                overflow-y: auto;
+            }
+
+
+            .menu-grid {
+                grid-template-columns:
+                    1fr;
+
+                gap: 35px;
+            }
+
+
+            .article-hero {
+                padding:
+                    120px 0
+                    65px;
+            }
+
+
+            .article-block {
+                grid-template-columns:
+                    1fr;
+
+                gap: 12px;
+
+                padding:
+                    40px 0;
+            }
+
+        }
+
+        /* =========================
+           Footer
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+.site-footer {
+    width: 100%;
+
+    /* 不要再 min-height: 650px */
+    min-height: 0;
+
+    margin-top: 120px;
+    padding: 60px 30px 35px;
+
+    box-sizing: border-box;
+    text-align: center;
+
+    background-image:
+        linear-gradient(
+            rgba(10, 24, 75, 0.18),
+            rgba(10, 24, 75, 0.30)
+        ),
+        url("../圖片/live_p_si.jpg");
+
+    background-size: cover;
+    background-position: center 68%;
+    background-repeat: no-repeat;
+
+    color: white;
+}
+
+.footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+
+    padding: 25px 40px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(10, 20, 70, 0.16);
+
+    backdrop-filter: blur(2px);
+}
+
+
+/* 英文小標 */
+
+.footer-label {
+    color: #ff9bd5;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.35em;
+
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.site-footer h2 {
+    color: #ffffff;
+
+    margin: 8px 0 25px;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.footer-nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.footer-nav a:hover {
+    color: #ff9bd5;
+    transform: translateY(-2px);
+}
+
+.footer-heart {
+    margin: 25px 0;
+
+    color: #ff77c8;
+    font-size: 24px;
+}
+
+.footer-project {
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 13px;
+    line-height: 1.9;
+
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
+}
+
+.footer-copy {
+    margin-top: 22px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 10px;
+    letter-spacing: 0.12em;
+}
+
+
+/* Footer 選單 */
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 15px 35px;
+}
+
+.footer-nav a {
+    color: rgba(255, 255, 255, 0.9);
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.footer-nav a:hover {
+    color: #ff70bd;
+}
+
+
+/* 小愛心 */
+
+.footer-heart {
+    margin: 35px 0;
+
+    color: #ff70bd;
+
+    font-size: 24px;
+}
+
+
+/* 專題說明 */
+
+.footer-project {
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 13px;
+    line-height: 1.9;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Copyright */
+
+.footer-copy {
+    margin-top: 22px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 10px;
+    letter-spacing: 0.12em;
+
+    text-shadow:
+        0 2px 7px rgba(0, 0, 0, 0.45);
+}
+
+
+/* 回到舞台 */
+
+.back-to-top {
+    margin-top: 28px;
+
+    padding: 11px 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+
+    background: rgba(20, 30, 90, 0.35);
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(6px);
+
+    transition: 0.25s ease;
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px);
+
+    background: white;
+    color: #5960c9;
+}
+
+/* =========================
+   活動形式
+========================= */
+
+.activity-intro {
+    margin-bottom: 30px !important;
+}
+
+
+.activity-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 30px;
+}
+
+
+/* 卡片 */
+
+.activity-card {
+    overflow: hidden;
+
+    background: white;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, 0.16);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(80, 60, 140, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.activity-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 16px 35px
+        rgba(80, 60, 140, 0.14);
+}
+
+
+/* 圖片 */
+
+.activity-card img {
+    display: block;
+
+    width: 100%;
+    height: 190px;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+/* 物販那張可以稍微調整裁切位置 */
+
+.activity-card img.buppan-image {
+    object-position: 48% center;
+}
+
+
+/* 文字區 */
+
+.activity-card-text {
+    padding: 22px;
+}
+
+
+.activity-card-text > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ff70bd;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.2em;
+}
+
+
+.activity-card-text h3 {
+    margin:
+        0 0
+        12px;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+.activity-card-text p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #666;
+}
+
+
+/* =========================
+   手機
+========================= */
+
+@media (max-width: 700px) {
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-card img {
+        height: 220px;
+    }
+
+}
+
+/* =========================
+   推し活流程
+========================= */
+
+.oshi-step-list {
+    margin-top: 35px;
+}
+
+.oshi-step {
+    display: grid;
+
+    grid-template-columns:
+        58px 1fr;
+
+    gap: 22px;
+
+    position: relative;
+
+    padding:
+        0 0
+        38px;
+}
+
+.oshi-step:not(:last-child)::before {
+    content: "";
+
+    position: absolute;
+
+    left: 28px;
+    top: 48px;
+
+    width: 2px;
+    height: calc(100% - 35px);
+
+    background:
+        linear-gradient(
+            #ff9bd5,
+            #b7bfff
+        );
+}
+
+.oshi-step-number {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 1;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border:
+        2px solid
+        #ff9bd5;
+
+    color: #ff70bd;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 15px
+        rgba(255, 112, 189, 0.12);
+}
+
+.oshi-step-en {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.2em;
+}
+
+.oshi-step h3 {
+    margin:
+        0 0
+        8px;
+
+    font-size: 20px;
+}
+
+.oshi-step p {
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    color: #666;
+}
+
+
+/* =========================
+   用語卡片
+========================= */
+
+.word-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px;
+
+    margin-top: 30px;
+}
+
+.word-card {
+    padding: 22px;
+
+    background: white;
+
+    border:
+        1px solid
+        rgba(255, 112, 189, 0.16);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 24px
+        rgba(80, 60, 140, 0.07);
+}
+
+.word-card > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.18em;
+}
+
+.word-card h3 {
+    margin:
+        0 0
+        8px;
+
+    font-size: 19px;
+}
+
+.word-card p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    color: #666;
+}
+
+
+@media (max-width: 700px) {
+
+    .word-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .oshi-step {
+        grid-template-columns:
+            50px 1fr;
+
+        gap: 16px;
+    }
+
+    .oshi-step-number {
+        width: 50px;
+        height: 50px;
+    }
+
+    .oshi-step:not(:last-child)::before {
+        left: 24px;
+        top: 43px;
+    }
+
+}
+.home-button {
+    position: fixed;
+
+    top: 25px;
+    left: 30px;
+
+    height: 60px;
+    width: 60px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    padding: 0 20px;
+
+    background: white;
+
+    border-radius: 999px;
+
+    color: #ff70bd;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 25px
+        rgba(80, 60, 140, .10);
+
+    z-index: 1000;
+
+    transition:
+        width .3s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.home-arrow {
+    flex-shrink: 0;
+
+    font-size: 22px;
+}
+
+
+.home-text {
+    margin-left: 12px;
+
+    opacity: 0;
+
+    white-space: nowrap;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .18em;
+
+    transition: opacity .2s ease;
+}
+
+
+.home-button:hover {
+    width: 125px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(80, 60, 140, .16);
+}
+
+
+.home-button:hover .home-text {
+    opacity: 1;
+}
+
+/* =========================
+   NEXT BEGINNER
+========================= */
+
+.beginner-next {
+    max-width: 900px;
+    margin: 0 auto 140px;
+}
+
+
+.beginner-next-label {
+    display: block;
+
+    margin-bottom: 14px;
+
+    color: #ff70bd;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .25em;
+}
+
+
+.beginner-next-link {
+    display: grid;
+
+    grid-template-columns: 70px 1fr auto;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 30px 10px;
+
+    border-top:
+        1px solid rgba(100, 80, 150, .15);
+
+    border-bottom:
+        1px solid rgba(100, 80, 150, .15);
+
+    color: #222;
+
+    text-decoration: none;
+
+    transition:
+        padding-left .3s ease,
+        color .3s ease;
+}
+
+
+.beginner-next-link:hover {
+    padding-left: 22px;
+
+    color: #ff70bd;
+}
+
+
+.beginner-next-number {
+    color: #ff70bd;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: .15em;
+}
+
+
+.beginner-next-title h2 {
+    margin: 0 0 5px;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+
+.beginner-next-title p {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+.beginner-next-arrow {
+    font-size: 28px;
+
+    transition: transform .3s ease;
+}
+
+
+.beginner-next-link:hover
+.beginner-next-arrow {
+    transform: translateX(8px);
+}
+
+
+@media (max-width: 600px) {
+
+    .beginner-next-link {
+        grid-template-columns: 45px 1fr auto;
+
+        gap: 15px;
+
+        padding: 25px 5px;
+    }
+
+
+    .beginner-next-title h2 {
+        font-size: 18px;
+    }
+
+}
+    
+
+/* =========================
+   イベント情報への外部リンクカード
+========================= */
+.event-resource-card {
+    display: block;
+    margin-top: 24px;
+    padding: 24px 26px;
+    border: 1px solid rgba(255, 112, 189, 0.24);
+    border-radius: 20px;
+    background: linear-gradient(135deg, #fff8fc 0%, #f8f8ff 100%);
+    color: #222;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(80, 60, 140, 0.06);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.event-resource-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 112, 189, 0.5);
+    box-shadow: 0 14px 30px rgba(80, 60, 140, 0.12);
+}
+.event-resource-kicker {
+    display: block;
+    margin-bottom: 9px;
+    color: #ff70bd;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .22em;
+}
+.event-resource-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 9px;
+}
+.event-resource-heading strong {
+    font-size: 19px;
+    line-height: 1.5;
+}
+.event-resource-arrow {
+    flex-shrink: 0;
+    color: #ff70bd;
+    font-size: 24px;
+    transition: transform .25s ease;
+}
+.event-resource-card:hover .event-resource-arrow {
+    transform: translateX(5px);
+}
+.event-resource-card p {
+    margin: 0;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.9;
+}
+.event-resource-note {
+    margin-top: 12px !important;
+    color: #888 !important;
+    font-size: 11px !important;
+}
+@media (max-width: 700px) {
+    .event-resource-card {
+        padding: 21px;
+    }
+    .event-resource-heading strong {
+        font-size: 17px;
+    }
+}
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         JP 按鈕
+    ========================= -->
+
+    <a
+        href="../歐他.html"
+        class="language-button"
+    >
+        CH
+    </a>
+
+    <a href="日文首頁.html" class="home-button">
+    <span class="home-arrow">←</span>
+    <span class="home-text">ホーム</span>
+</a>
+
+
+
+    <!-- =========================
+         漢堡按鈕
+    ========================= -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="メニューを開く"
+    >
+        ☰
+    </button>
+
+
+
+    <!-- =========================
+         展開選單
+    ========================= -->
+
+    <nav
+        class="menu-panel"
+        id="menuPanel"
+    >
+
+
+        <!-- 關閉 X -->
+
+        <button
+            class="menu-close"
+            id="menuClose"
+            aria-label="メニューを閉じる"
+        >
+
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+
+        <div class="menu-grid">
+
+
+            <!-- BEGINNER -->
+
+            <div class="menu-column">
+
+                <p class="menu-category">
+                    BEGINNER
+                </p>
+
+                <a href="日文首頁.html">
+                    ♡ ホーム
+                </a>
+
+                <a href="日文地下偶像介紹.html">
+                    ♡ 地下アイドルとは？
+                </a>
+
+                <a href="日文歐他.html">
+                    ♡ オタクになるには
+                </a>
+
+                <a href="日文MIX.html">
+                    ♡ MIX入門
+                </a>
+
+                <a href="../如何成為地下偶像.html">
+                    ♡ 地下アイドルを目指す人へ
+                </a>
+
+            </div>
+
+
+
+            <!-- IDOL -->
+
+            <div class="menu-column">
+
+                <p class="menu-category">
+                    IDOL
+                </p>
+
+                <a href="日文企業偶像.html">
+                    ♡ 事務所所属アイドル
+                </a>
+
+                <a href="日文自營偶像.html">
+                    ♡ セルフプロデュースアイドル
+                </a>
+
+                <a href="日文個人偶像.html">
+                    ♡ ソロアイドル
+                </a>
+
+                <a href="日文店鋪偶像.html">
+                    ♡ 店舗アイドル
+                </a>
+
+            </div>
+
+
+
+            <!-- INFORMATION -->
+
+            <div class="menu-column">
+
+                <p class="menu-category">
+                    INFORMATION
+                </p>
+
+                <a href="日文首頁.html#calendar">
+                    ♡ イベントカレンダー
+                </a>
+
+                <a href="資料來源.html">
+                    ♡ 参考資料・謝辞
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         文章頁
+    ========================= -->
+
+   <main class="article-page">
+
+    <!-- HERO -->
+    <section class="article-hero">
+
+        <p class="article-label">
+            BEGINNER 02
+        </p>
+
+        <h1>
+            オタクになるには？
+        </h1>
+
+        <p class="article-lead">
+            初めての地下アイドルイベントでも大丈夫！
+            イベント探しから特典会まで、推し活の基本的な流れを紹介します。
+        </p>
+
+    </section>
+
+
+    <section class="article-content">
+
+
+        <!-- 01 -->
+        <div class="article-block">
+
+            <span class="article-number">01</span>
+
+            <div class="article-text">
+
+                <h2>「オタク」とは？</h2>
+
+                <p>
+                「オタク」はアイドル文化では、アイドルを応援し、
+                    関連イベントに参加するファンを指す言葉として使われます。
+                </p>
+
+                <p>
+                    アイドルを応援したり、イベントに参加したり、グッズを購入したりする活動は、
+                    一般的に「推し活」と呼ばれます。
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- 02 -->
+       <div class="oshi-step">
+    <span class="oshi-step-number">02</span>
+
+    <div>
+        <span class="oshi-step-en">TICKET</span>
+        <h3>チケットを購入する</h3>
+
+        <p>
+            公式のお知らせを確認して前売りチケットを購入しましょう。
+            イベントによっては当日券が販売される場合もあります。
+        </p>
+
+        <p class="step-tip">
+            ♡ イベントによっては「指名入場」制度があります。
+            チケット購入時や入場時に、応援したいグループを指定でき、
+            そのグループの入場特典を受け取れる場合があります。
+        </p>
+
+        <a class="event-resource-card"
+           href="https://idolinfohub.com/hosts"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Idol Info Hubのイベント主催者一覧を見る（新しいタブで開く）">
+            <span class="event-resource-kicker">EVENT GUIDE / EXTERNAL RESOURCE</span>
+            <span class="event-resource-heading">
+                <strong>イベント情報はどこで探す？<br>主催者一覧からチェック</strong>
+                <span class="event-resource-arrow" aria-hidden="true">↗</span>
+            </span>
+            <p>
+                Idol Info Hubでは、地下アイドル関連のイベントや主催者情報を確認できます。
+                まずはさまざまな主催者を知り、各イベントの公式告知で出演者やチケットの購入方法を確認してみましょう。
+            </p>
+            <p class="event-resource-note">
+                ※ 開催日時、チケット料金、購入方法、入場ルールは、各主催者の最新のお知らせをご確認ください。
+            </p>
+        </a>
+    </div>
+</div>
+
+
+                    <div class="oshi-step">
+    <span class="oshi-step-number">03</span>
+
+    <div>
+        <span class="oshi-step-en">ENTER</span>
+        <h3>入場列に並ぶ</h3>
+
+        <p>
+            ライブハウスやイベント会場に到着したら、
+            主催者の案内に従って列に並び、順番に入場します。
+        </p>
+
+        <p class="step-tip">
+            ♡ 会場によっては入場時にドリンク代が別途必要です
+            。詳しくはイベントのお知らせをご確認ください。
+        </p>
+    </div>
+</div>
+
+
+
+                    <div class="oshi-step">
+                        <span class="oshi-step-number">04</span>
+                        <div>
+                            <span class="oshi-step-en">LIVE</span>
+                            <h3>LIVE START!</h3>
+                            <p>
+                                ライブパフォーマンスを楽しみましょう。
+                                コールなどで好きなアイドルを応援することもできます。
+                            </p>
+                        </div>
+                    </div>
+
+
+                   <div class="oshi-step">
+    <span class="oshi-step-number">05</span>
+
+    <div>
+        <span class="oshi-step-en">MEET & GOODS</span>
+        <h3>特典会・物販</h3>
+
+        <p>
+            ライブの前後には、グッズ販売や
+            チェキ撮影、特典券を使ったイベントが行われることがあります。
+        </p>
+
+        <p class="step-tip">
+            ♡ チェキ撮影や交流イベントに参加したい場合は、
+            通常、対応する特典券を購入してから、
+            会場の案内に従って列に並びます。
+        </p>
+    </div>
+</div>
+
+
+                    <div class="oshi-step">
+                        <span class="oshi-step-number">06</span>
+                        <div>
+                            <span class="oshi-step-en">MEET</span>
+                            <h3>推しと交流する</h3>
+                            <p>
+                                会場のルールに従ってメンバーの列に並び、
+                                チェキを撮影したり、短い時間交流したりします。
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="oshi-step">
+                        <span class="oshi-step-number">07</span>
+                        <div>
+                            <span class="oshi-step-en">NEXT</span>
+                            <h3>帰宅／次のイベントへ</h3>
+                            <p>
+                                これで今日の推し活は終了！
+                                ほかにもイベントがあれば、次の会場へ向かうこともあります。
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="category-note">
+
+                    <span>PLEASE NOTE</span>
+
+                    <p>
+                        イベントによって入場方法、チケットのルール、
+                        物販や特典会の流れは異なります。
+                        出かける前に、主催者やアイドル公式SNSのお知らせを確認しましょう。
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 03 -->
+        <div class="article-block">
+
+            <span class="article-number">03</span>
+
+            <div class="article-text">
+
+                <h2>初めてライブに参加するときのポイント</h2>
+
+                <div class="category-note">
+
+                    <span>BEFORE YOU GO</span>
+
+                    <p>
+                        ライブハウスは人が密集することが多いため、
+                        会場へ行く前に、衛生面や身だしなみに気を配り、
+                        会場のルールを守り、ほかの観客や出演者を尊重しましょう。
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 04 -->
+        <div class="article-block">
+
+            <span class="article-number">04</span>
+
+            <div class="article-text">
+
+                <h2>初心者がよく出会う用語</h2>
+
+                <div class="word-grid">
+
+                    <div class="word-card">
+                        <span>OSHI-KATSU</span>
+                        <h3>推し活</h3>
+                        <p>アイドルを応援し、関連イベントに参加する活動全般。</p>
+                    </div>
+
+                    <div class="word-card">
+                        <span>OSHI</span>
+                        <h3>推し</h3>
+                        <p>自分が応援している、好きなアイドルやメンバー。</p>
+                    </div>
+
+                    <div class="word-card">
+                        <span>NEW</span>
+                        <h3>新規</h3>
+                        <p>そのアイドルやグループを応援し始めたばかりのファン。</p>
+                    </div>
+
+                    <div class="word-card">
+                        <span>OLD FAN</span>
+                        <h3>古参</h3>
+                        <p>比較的早い時期から応援しているファン。</p>
+                    </div>
+
+                    <div class="word-card">
+                        <span>GOODS</span>
+                        <h3>物販</h3>
+                        <p>イベント会場でグッズや特典券を販売する時間・ブース。</p>
+                    </div>
+
+                    <div class="word-card">
+                        <span>SELECT</span>
+                        <h3>指名</h3>
+                        <p>イベントで応援したいグループやアイドルを指定すること。</p>
+                    </div>
+
+                    <div class="word-card">
+                        <span>ADVANCE</span>
+                        <h3>先行販売</h3>
+                        <p>一般販売の開始前に行われる先行販売や先行受付。</p>
+                    </div>
+
+                    <div class="word-card">
+                        <span>FREE</span>
+                        <h3>無料</h3>
+                        <p>料金がかからないこと。</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+    <nav class="beginner-next">
+
+    <span class="beginner-next-label">
+        NEXT BEGINNER
+    </span>
+
+    <a href="日文MIX.html" class="beginner-next-link">
+
+    <span class="beginner-next-number">03</span>
+
+    <div class="beginner-next-title">
+        <h2>MIX入門</h2>
+        <p>ライブでの応援方法を一緒に学ぼう</p>
+    </div>
+
+    <span class="beginner-next-arrow">→</span>
+
+</a>
+
+</nav>
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <p class="footer-label">
+            TAIWAN UNDERGROUND IDOL CULTURE
+        </p>
+
+        <h2>台湾地下アイドル文化ガイド</h2>
+
+        <div class="footer-nav">
+            <a href="日文首頁.html#calendar">SCHEDULE</a>
+            <a href="日文地下偶像介紹.html">BEGINNER</a>
+            <a href="#">IDOL</a>
+        </div>
+
+        <div class="footer-heart">♡</div>
+
+        <p class="footer-project">
+            本ウェブサイトは卒業制作として制作しています。<br>
+            参考資料・関連リンクは「Credits」をご覧ください。
+        </p>
+
+        <p class="footer-copy">
+            © 2026 TAIWAN UNDERGROUND IDOL CULTURE
+        </p>
+
+    </div>
+
+    <button class="back-to-top" id="backToTop">
+        ページトップへ ↑
+    </button>
+
+</footer>
+</main>
+
+
+
+    <!-- =========================
+         選單 JS
+    ========================= -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+        const menuPanel =
+            document.getElementById(
+                "menuPanel"
+            );
+
+        const menuClose =
+            document.getElementById(
+                "menuClose"
+            );
+
+
+        /* 打開 */
+
+        menuButton.addEventListener(
+            "click",
+            () => {
+
+                menuPanel.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /* 關閉 */
+
+        menuClose.addEventListener(
+            "click",
+            () => {
+
+                menuPanel.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /* 按 ESC 也可以關 */
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    menuPanel.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+        const backToTop =
+    document.getElementById("backToTop");
+
+backToTop.addEventListener("click", () => {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+    </script>
+
+
+</body>
+
+</html>
